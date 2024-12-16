@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    mysql:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/{DB명}
+      username:
+      password:
+
+    postgresql:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/{DB명}
+      username:
+      password:
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        dialect:
+          mysql: org.hibernate.dialect.MySQLDialect
+          postgresql: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    generate-ddl: true
