@@ -45,7 +45,7 @@ public class PostgresqlDatasourceConfig {
     }
 
     @Bean(name = "postgresqlEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory(EntityManagerFactoryBuilder builder) {
+    public LocalContainerEntityManagerFactoryBean secondEntityManagerFactory(EntityManagerFactoryBuilder builder) {
         DataSource dataSource = postgresqlDatasource();
         HashMap<String, String> objectObjectHashMap = new HashMap<>();
         objectObjectHashMap.put("hibernate.dialect", dialect);
@@ -58,7 +58,7 @@ public class PostgresqlDatasourceConfig {
     }
 
     @Bean(name = "postgresqlTransactionManager")
-    public PlatformTransactionManager primaryTransactionManager(
+    public PlatformTransactionManager secondTransactionManager(
             final @Qualifier("postgresqlEntityManagerFactory") LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean
     ) {
         return new JpaTransactionManager(localContainerEntityManagerFactoryBean.getObject());
