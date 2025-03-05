@@ -1,11 +1,13 @@
 package com.example.multidb.config;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -53,9 +55,12 @@ public class MysqlDatasourceConfig {
         DataSource dataSource = mysqlDatasource();
         HashMap<String, String> objectObjectHashMap = new HashMap<>();
         objectObjectHashMap.put("hibernate.dialect", dialect);
+        objectObjectHashMap.put("hibernate.ddl-auto", "validate");
+        objectObjectHashMap.put("hibernate.physical_naming_strategy", CamelCaseToUnderscoresNamingStrategy.class.getName()); // CamelCase → snake_case 자동 변환
+        objectObjectHashMap.put("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy.class.getName()); // @Table, @Column이 없을 때 자동 변환
         return builder
                 .dataSource(dataSource)
-                .packages("com.example.multidb.entity") // 첫번째 DB와 관련된 엔티티들이 있는 패키지(폴더) 경로
+                .packages("com.example.multidb.entity") // 첫번째 DB와 관련된 엔티티들이 있는 패키지(폴더) 경로, 여러 경로 시 : .packages("com.example.multidb.entity","com.example.multidb.aaa.entity")
                 .persistenceUnit("mysqlEntityManager")
                 .properties(objectObjectHashMap)
                 .build();
