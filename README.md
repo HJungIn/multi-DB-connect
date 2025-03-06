@@ -38,3 +38,4 @@
 ###### 참조
 * 설정 : https://velog.io/@juhyeon1114/JPAQuerydsl-Multiple-Databases%EB%8B%A4%EC%A4%91-DB-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0
 * LocalContainerEntityManagerFactoryBean에 properties 추가 : https://velog.io/@lehdqlsl/SpringBoot-JPA-Multiple-Databases-%EC%84%A4%EC%A0%95
+* 참조 : https://jong-bae.tistory.com/58
