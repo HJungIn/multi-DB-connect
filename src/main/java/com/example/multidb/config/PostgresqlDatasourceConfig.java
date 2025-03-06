@@ -51,7 +51,7 @@ public class PostgresqlDatasourceConfig {
         DataSource dataSource = postgresqlDatasource();
         HashMap<String, String> objectObjectHashMap = new HashMap<>();
         objectObjectHashMap.put("hibernate.dialect", dialect);
-        objectObjectHashMap.put("hibernate.ddl-auto", "validate");
+        objectObjectHashMap.put("hibernate.hbm2ddl.auto", "update"); // 자동 생성 property : ddl-auto는 안됨
         objectObjectHashMap.put("hibernate.physical_naming_strategy", CamelCaseToUnderscoresNamingStrategy.class.getName()); // CamelCase → snake_case 자동 변환
         objectObjectHashMap.put("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy.class.getName()); // @Table, @Column이 없을 때 자동 변환
         return builder
